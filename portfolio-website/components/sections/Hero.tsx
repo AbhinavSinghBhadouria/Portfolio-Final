@@ -15,12 +15,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delayChildren: 0.3, staggerChildren: 0.2 }}
-          className="text-center"
-        >
+        <div className="text-center">
           {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,7 +44,7 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Bio based on your Resume Details */}
+          {/* Bio */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,20 +64,18 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            {/* Navigates to <section id="projects"> */}
             <Button 
               size="lg" 
               asChild 
-              className="h-14 px-8 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:shadow-primary/50 transition-all group relative overflow-hidden"
+              className="h-14 px-8 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:shadow-primary/50 transition-all group"
             >
               <Link href="#projects">
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   Launch Projects <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             </Button>
 
-            {/* Downloads /public/resume.pdf */}
             <Button 
               size="lg" 
               variant="outline" 
@@ -96,7 +89,7 @@ export default function Hero() {
             </Button>
           </motion.div>
 
-          {/* Quick Stats Grid (LeetCode & Problems) */}
+          {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,11 +111,10 @@ export default function Hero() {
               <span className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground">Current CGPA</span>
             </div>
           </motion.div>
-
-        </motion.div>
+        </div>
       </div>
 
-      {/* Decorative Scroll Indicator */}
+      {/* Scroll Indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-20">
         <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground [writing-mode:vertical-lr]">Scroll</span>
