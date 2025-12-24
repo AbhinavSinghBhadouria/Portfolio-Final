@@ -1,27 +1,26 @@
 "use client"
 
-import { motion, Variants } from "framer-motion" // Added Variants import
+import { motion, Variants } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Github, ExternalLink, Layers } from "lucide-react"
 import { projects } from "@/data/projects"
-import { cn } from "@/lib/utils"
 
 export default function Projects() {
-  // 1. Properly type the container variants
+  // Properly type the container variants
   const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: { 
         staggerChildren: 0.15,
-        ease: [0.25, 0.46, 0.45, 0.94] // Added explicit ease for build stability
+        ease: [0.25, 0.46, 0.45, 0.94]
       }
     }
   }
 
-  // 2. Properly type the item variants
+  // Properly type the item variants
   const item: Variants = {
     hidden: { opacity: 0, y: 30 },
     show: { 
@@ -29,7 +28,7 @@ export default function Projects() {
       y: 0, 
       transition: { 
         duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94] // Added explicit ease for build stability
+        ease: [0.25, 0.46, 0.45, 0.94]
       } 
     }
   }
@@ -42,7 +41,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.5, ease: [0.6, 0.01, 0.05, 0.95] }}
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-20"
         >
@@ -94,7 +93,7 @@ export default function Projects() {
                     </Badge>
                   </div>
                   
-                  <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none z-10" />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-10 pointer-events-none z-10" />
                 </div>
 
                 <CardContent className="p-8 space-y-4">

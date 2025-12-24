@@ -1,11 +1,11 @@
 "use client"
 
-import { motion, Variants } from "framer-motion" // Added Variants import
+import { motion, Variants } from "framer-motion"
 import { Code2, Cpu, Globe, Sparkles, Terminal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function About() {
-  // 1. Defining Variants to satisfy TypeScript
+  // Defining Variants to satisfy TypeScript
   const sectionVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -66,7 +66,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }} // Added explicit ease
+            transition={{ duration: 0.5, ease: [0.6, 0.01, 0.05, 0.95] }}
             viewport={{ once: true }}
             className="lg:col-span-5 relative group"
           >
@@ -78,7 +78,7 @@ export default function About() {
                 className="object-cover w-full h-full hover:grayscale-0 transition-all duration-700"
               />
               
-              <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] opacity-20 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
               
               {/* Animated Scanline Overlay */}
@@ -88,7 +88,7 @@ export default function About() {
                 transition={{ 
                   repeat: Infinity, 
                   duration: 4, 
-                  ease: "linear" // Explicitly set to linear for consistent scanning
+                  ease: "linear"
                 }}
                 className="absolute left-0 w-full h-[2px] bg-primary/30 blur-sm pointer-events-none"
               />
@@ -99,7 +99,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }} // Added explicit ease
+            transition={{ duration: 0.6, ease: [0.6, 0.01, 0.05, 0.95] }}
             viewport={{ once: true }}
             className="lg:col-span-7 space-y-8"
           >
