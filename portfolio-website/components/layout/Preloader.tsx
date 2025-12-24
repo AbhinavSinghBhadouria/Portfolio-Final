@@ -29,7 +29,7 @@ export default function Preloader() {
       initial={{ opacity: 1 }}
       exit={{ 
         clipPath: "inset(50% 0 50% 0)", 
-        transition: { duration: 0.6, ease: [0.85, 0, 0.15, 1] } 
+        transition: { duration: 0.6 } 
       }}
       className="fixed inset-0 z-[1000] flex items-center justify-center bg-[#030303] text-white overflow-hidden"
     >
@@ -40,7 +40,7 @@ export default function Preloader() {
             key={i}
             initial={{ x: -100 }}
             animate={{ x: 0 }}
-            transition={{ repeat: Infinity, duration: 2, ease: "linear", delay: i * 0.05 }}
+            transition={{ repeat: Infinity, duration: 2, delay: i * 0.05 }}
           >
             {/* We can now safely use Math.random because this only runs on the client */}
             {`> FETCH_METADATA_BLOCK_${i} ... [0x${Math.random().toString(16).slice(2, 6).toUpperCase()}] ... STATUS_OK`}
@@ -63,7 +63,7 @@ export default function Preloader() {
               strokeDasharray="691"
               initial={{ strokeDashoffset: 691 }}
               animate={{ strokeDashoffset: 691 - (691 * percent) / 100 }}
-              transition={{ ease: "linear", duration: 0.1 }}
+              transition={{ duration: 0.1 }}
               style={{ filter: "drop-shadow(0 0 12px var(--primary))" }}
             />
           </svg>

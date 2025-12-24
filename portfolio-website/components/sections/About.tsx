@@ -75,7 +75,7 @@ export default function About() {
               <motion.div 
                 initial={{ top: "-100%" }}
                 animate={{ top: "100%" }}
-                transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                transition={{ repeat: Infinity, duration: 4 }}
                 className="absolute left-0 w-full h-[2px] bg-primary/30 blur-sm pointer-events-none"
               />
             </div>
