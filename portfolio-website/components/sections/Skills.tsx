@@ -25,7 +25,7 @@ export default function Skills() {
       transition: { 
         delay: idx * 0.1,
         duration: 0.5,
-        ease: "easeOut" // Explicitly defined ease for build stability
+        ease: [0.25, 0.46, 0.45, 0.94] // Explicitly defined ease for build stability
       }
     })
   }
@@ -35,7 +35,7 @@ export default function Skills() {
     visible: { 
       opacity: 1, 
       y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } 
     }
   }
 
