@@ -1,10 +1,20 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion" // Added Variants import
 import { Code2, Cpu, Globe, Sparkles, Terminal } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function About() {
+  // 1. Defining Variants to satisfy TypeScript
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    }
+  }
+
   const features = [
     {
       icon: <Terminal className="h-6 w-6" />,
@@ -35,8 +45,9 @@ export default function About() {
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-20"
         >
@@ -55,19 +66,18 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }} // Added explicit ease
             viewport={{ once: true }}
             className="lg:col-span-5 relative group"
           >
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <div className="relative glass rounded-2xl overflow-hidden aspect-[4/5] border border-white/10">
-              {/* Profile Image with Futuristic Filter */}
               <img 
                 src="/Profile.jpeg" 
                 alt="Abhinav Singh Bhadouria" 
                 className="object-cover w-full h-full hover:grayscale-0 transition-all duration-700"
               />
               
-              {/* Technical Overlays */}
               <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60" />
               
@@ -75,7 +85,11 @@ export default function About() {
               <motion.div 
                 initial={{ top: "-100%" }}
                 animate={{ top: "100%" }}
-                transition={{ repeat: Infinity, duration: 4 }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 4, 
+                  ease: "linear" // Explicitly set to linear for consistent scanning
+                }}
                 className="absolute left-0 w-full h-[2px] bg-primary/30 blur-sm pointer-events-none"
               />
             </div>
@@ -85,15 +99,16 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }} // Added explicit ease
             viewport={{ once: true }}
             className="lg:col-span-7 space-y-8"
           >
             <div className="space-y-4">
-              <h3 className="text-3xl md:text-4xl font-bold tracking-tight">
+              <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
                 Engineering <span className="text-primary">Reliable Futures</span>
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                I am <span className="text-foreground font-semibold">Abhinav Singh Bhadouria</span>, a Computer Science undergraduate at PSIT. I specialize in building <span className="text-primary font-medium">high-performance backend systems</span> and <span className="text-accent font-medium">applied machine learning</span>. My focus is on reducing latency, optimizing performance, and solving complex technical problems through modular engineering.
+                I am <span className="text-foreground font-semibold text-white">Abhinav Singh Bhadouria</span>, a Computer Science undergraduate at PSIT. I specialize in building <span className="text-primary font-medium">high-performance backend systems</span> and <span className="text-accent font-medium">applied machine learning</span>. My focus is on reducing latency, optimizing performance, and solving complex technical problems through modular engineering.
               </p>
             </div>
 
@@ -127,7 +142,7 @@ export default function About() {
                       {feature.icon}
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">{feature.title}</h4>
+                      <h4 className="font-bold text-lg mb-1 text-white">{feature.title}</h4>
                       <p className="text-sm text-muted-foreground">{feature.description}</p>
                     </div>
                   </div>

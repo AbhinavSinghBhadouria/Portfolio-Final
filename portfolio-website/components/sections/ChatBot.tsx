@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, Variants } from "framer-motion"
 import { MessageSquare, X, Send, Bot, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -16,17 +16,33 @@ export default function ChatBot() {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
-    { role: "bot", content: "System Online. I am Abhinav's AI assistant. Ask me about his projects, CGPA, or DSA achievements!" }
+    { role: "bot", content: "System Online. I am Abhinav's AI assistant. How can I assist your inquiry today?" }
   ])
 
   const scrollRef = useRef<HTMLDivElement>(null)
 
-  // Auto-scroll to bottom on new messages
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
     }
   }, [messages, isLoading])
+
+  // Build-ready Animation Variants
+  const chatVariants: Variants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
+    },
+    exit: { 
+      opacity: 0, 
+      y: 20, 
+      scale: 0.95,
+      transition: { duration: 0.2, ease: "easeIn" }
+    }
+  }
 
   const handleSendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -48,7 +64,7 @@ export default function ChatBot() {
       const data = await response.json();
       setMessages([...updatedMessages, { role: "bot", content: data.content }]);
     } catch (error) {
-      setMessages([...updatedMessages, { role: "bot", content: "Connection error. My neural pathways are temporarily offline." }]);
+      setMessages([...updatedMessages, { role: "bot", content: "Communication failure. Check your network protocols." }]);
     } finally {
       setIsLoading(false);
     }
@@ -59,9 +75,10 @@ export default function ChatBot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            variants={chatVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="mb-4 w-80 sm:w-96 h-[500px] glass border border-white/10 rounded-3xl overflow-hidden flex flex-col shadow-2xl shadow-primary/10"
           >
             {/* Header */}
@@ -111,7 +128,7 @@ export default function ChatBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Ask me anything..." 
+                placeholder="Query system..." 
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-primary/50 text-white placeholder:text-white/20"
                 disabled={isLoading}
               />
@@ -128,10 +145,9 @@ export default function ChatBot() {
         )}
       </AnimatePresence>
 
-      {/* Floating Toggle Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="h-14 w-14 rounded-full shadow-2xl bg-primary text-black hover:scale-110 transition-all border-none"
+        className="h-14 w-14 rounded-full shadow-2xl bg-primary text-black hover:scale-110 transition-all border-none shadow-primary/20"
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion" // Added Variants import
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,17 +9,29 @@ import { projects } from "@/data/projects"
 import { cn } from "@/lib/utils"
 
 export default function Projects() {
-  const container = {
+  // 1. Properly type the container variants
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { 
+        staggerChildren: 0.15,
+        ease: "easeOut" // Added explicit ease for build stability
+      }
     }
   }
 
-  const item = {
+  // 2. Properly type the item variants
+  const item: Variants = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut" // Added explicit ease for build stability
+      } 
+    }
   }
 
   return (
@@ -30,12 +42,13 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-20"
         >
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest mb-4">
             <Layers className="h-3 w-3" />
-            <span>Project Section</span>
+            <span>Portfolio Selection</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-gradient mb-6 text-white">
             Featured Works
@@ -59,17 +72,14 @@ export default function Projects() {
                 
                 {/* Project Image / Visual Area */}
                 <div className="relative h-56 w-full overflow-hidden">
-                  {/* Subtle overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10 opacity-60" />
                   
-                  {/* Actual Project Image */}
                   <img 
                     src={project.image} 
                     alt={project.title}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
                   />
 
-                  {/* Top-left "Metric" Badge - Highlights your 35% latency etc. */}
                   {project.metrics && (
                     <div className="absolute top-4 left-4 z-20">
                       <Badge className="bg-primary/20 text-primary border-primary/40 backdrop-blur-md text-[9px] font-bold uppercase py-1">
@@ -78,14 +88,12 @@ export default function Projects() {
                     </div>
                   )}
 
-                  {/* Top-right "Type" Badge */}
                   <div className="absolute top-4 right-4 z-20">
                     <Badge className="glass border-white/10 text-[10px] font-bold uppercase tracking-tighter py-1 bg-black/50 backdrop-blur-md text-white">
                       {project.id === 3 ? "Machine Learning" : "Full Stack"}
                     </Badge>
                   </div>
                   
-                  {/* Cyber Grid Overlay */}
                   <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none z-10" />
                 </div>
 
@@ -105,7 +113,6 @@ export default function Projects() {
                     ))}
                   </div>
 
-                  {/* Action Buttons */}
                   <div className="flex gap-3 pt-6 border-t border-white/5">
                     <Button variant="ghost" size="sm" className="flex-1 rounded-xl border border-white/5 text-white hover:bg-primary hover:text-black transition-all group/btn" asChild>
                       <a href={project.github} target="_blank" rel="noopener noreferrer">

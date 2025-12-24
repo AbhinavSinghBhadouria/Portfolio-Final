@@ -1,12 +1,12 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion" // Added Variants import
 import { Badge } from "@/components/ui/badge"
 import { skills } from "@/data/skills"
 import { Cpu, Globe, Database, Layout, Terminal, PenTool } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// Mapping icons to categories for that professional look
+// Mapping icons to categories
 const categoryIcons: Record<string, any> = {
   "Frontend": <Layout className="h-5 w-5" />,
   "Backend": <Database className="h-5 w-5" />,
@@ -16,6 +16,29 @@ const categoryIcons: Record<string, any> = {
 }
 
 export default function Skills() {
+  // 1. Defined typed variants for the grid items
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: (idx: number) => ({
+      opacity: 1, 
+      scale: 1,
+      transition: { 
+        delay: idx * 0.1,
+        duration: 0.5,
+        ease: "easeOut" // Explicitly defined ease for build stability
+      }
+    })
+  }
+
+  const headerVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    }
+  }
+
   return (
     <section id="skills" className="relative py-24 overflow-hidden">
       {/* Background Decorative Glow */}
@@ -24,8 +47,9 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           className="flex flex-col items-center text-center mb-20"
         >
@@ -33,7 +57,7 @@ export default function Skills() {
             <Globe className="h-3 w-3" />
             <span>Technical Proficiency</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-gradient mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-gradient mb-6 text-white">
             Tech Stack
           </h2>
         </motion.div>
@@ -43,22 +67,23 @@ export default function Skills() {
           {skills.map((category, idx) => (
             <motion.div
               key={category.category}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              custom={idx} // Passing index to the variant function
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
               whileHover={{ y: -5 }}
               className="group relative"
             >
               {/* Card Glow Background */}
               <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
               
-              <div className="relative glass p-8 rounded-2xl border-white/5 h-full flex flex-col">
+              <div className="relative glass p-8 rounded-2xl border-white/5 h-full flex flex-col bg-black/40">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-black transition-all duration-300">
                     {categoryIcons[category.category] || categoryIcons.Default}
                   </div>
-                  <h3 className="text-xl font-bold tracking-tight">{category.category}</h3>
+                  <h3 className="text-xl font-bold tracking-tight text-white">{category.category}</h3>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -66,7 +91,7 @@ export default function Skills() {
                     <Badge
                       key={skill}
                       variant="outline"
-                      className="bg-white/5 border-white/10 text-[11px] font-bold uppercase tracking-wider py-1.5 px-3 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all cursor-default"
+                      className="bg-white/5 border-white/10 text-[11px] font-bold uppercase tracking-wider py-1.5 px-3 hover:bg-primary hover:text-black hover:border-primary transition-all cursor-default text-white/80"
                     >
                       {skill}
                     </Badge>
