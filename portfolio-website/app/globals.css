@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* 1. Tailwind v4 Theme Configuration */
+@theme {
+  /* Mapping variables to Tailwind utilities */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Custom Animations for that "Professional" feel */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-pulse-slow: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 2. Color Variables (Futuristic Dark/Light Theme) */
+@layer base {
+  :root {
+    --background: oklch(0.98 0.01 200);
+    --foreground: oklch(0.15 0.02 240);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.15 0.02 240);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.15 0.02 240);
+    --primary: oklch(0.25 0.02 240);
+    --primary-foreground: oklch(0.98 0 0);
+    --secondary: oklch(0.92 0.01 240);
+    --secondary-foreground: oklch(0.25 0.02 240);
+    --muted: oklch(0.92 0.01 240);
+    --muted-foreground: oklch(0.4 0.02 240);
+    --accent: oklch(0.6 0.18 250);
+    --accent-foreground: oklch(1 0 0);
+    --destructive: oklch(0.6 0.2 25);
+    --destructive-foreground: oklch(0.98 0 0);
+    --border: oklch(0.9 0.01 240);
+    --input: oklch(0.9 0.01 240);
+    --ring: oklch(0.6 0.18 250);
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: oklch(0.12 0.015 250); /* Deep Space Blue/Black */
+    --foreground: oklch(0.95 0.01 250);
+    --card: oklch(0.16 0.02 250 / 0.8);
+    --card-foreground: oklch(0.95 0.01 250);
+    --popover: oklch(0.14 0.02 250);
+    --popover-foreground: oklch(0.95 0.01 250);
+    --primary: oklch(0.7 0.15 250); /* Electric Blue */
+    --primary-foreground: oklch(0.12 0.015 250);
+    --secondary: oklch(0.25 0.03 250);
+    --secondary-foreground: oklch(0.95 0.01 250);
+    --muted: oklch(0.25 0.03 250);
+    --muted-foreground: oklch(0.7 0.02 250);
+    --accent: oklch(0.75 0.18 180); /* Cyber Neon Cyan */
+    --accent-foreground: oklch(0.12 0.015 250);
+    --destructive: oklch(0.4 0.2 25);
+    --destructive-foreground: oklch(0.95 0.01 250);
+    --border: oklch(1 0 0 / 12%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.7 0.15 250);
+    --glow: oklch(0.7 0.15 250 / 0.3);
+  }
+}
+
+/* 3. Base Resets & Global Styles */
+@layer base {
+  * {
+    /* Using direct variable here solves the "unknown utility" error */
+    border-color: var(--border);
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 4. Custom Futuristic Utilities */
+@layer utilities {
+  /* Ultra-modern Frosted Glass */
+  .glass {
+    background: var(--card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* High-end Text Gradient (Light -> Faded) */
+  .text-gradient {
+    background: linear-gradient(to bottom right, #ffffff, rgba(255, 255, 255, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Neon Glow Effect */
+  .neo-glow {
+    box-shadow: 0 0 20px var(--glow);
+  }
+
+  /* Technical Grid Background */
+  .bg-grid {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, oklch(1 0 0 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(1 0 0 / 0.05) 1px, transparent 1px);
+  }
+}
+
+/* 5. Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
