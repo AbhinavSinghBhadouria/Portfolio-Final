@@ -1,5 +1,5 @@
 [provider]
-node = "18"
+node = "20"
 
 [phases.build]
 dependsOn = ["install"]
