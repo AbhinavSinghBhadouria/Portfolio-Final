@@ -8,7 +8,6 @@ import Link from "next/link"
 export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
-      {/* Background Layer */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
@@ -16,7 +15,6 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
         <div className="text-center">
-          {/* Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -31,7 +29,6 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Main Header */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -44,7 +41,6 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Bio */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -57,18 +53,13 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-6 justify-center items-center"
           >
-            <Button 
-              size="lg" 
-              asChild 
-              className="h-14 px-8 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:shadow-primary/50 transition-all group"
-            >
+            <Button size="lg" asChild className="h-14 px-8 rounded-full font-bold uppercase tracking-widest hover:shadow-2xl hover:shadow-primary/50 transition-all group">
               <Link href="#projects">
                 <span className="flex items-center gap-2">
                   Launch Projects <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -76,12 +67,7 @@ export default function Hero() {
               </Link>
             </Button>
 
-            <Button 
-              size="lg" 
-              variant="outline" 
-              asChild 
-              className="h-14 px-8 rounded-full border-2 backdrop-blur-sm font-bold uppercase tracking-widest hover:bg-primary/10 transition-all"
-            >
+            <Button size="lg" variant="outline" asChild className="h-14 px-8 rounded-full border-2 backdrop-blur-sm font-bold uppercase tracking-widest hover:bg-primary/10 transition-all">
               <a href="/resume.pdf" download="Abhinav_Singh_Bhadouria_Resume.pdf" className="flex items-center gap-2">
                 <Download className="h-4 w-4 text-primary" />
                 Acquire CV
@@ -89,7 +75,6 @@ export default function Hero() {
             </Button>
           </motion.div>
 
-          {/* Quick Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -114,7 +99,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-20">
         <div className="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent" />
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-foreground [writing-mode:vertical-lr]">Scroll</span>

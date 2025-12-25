@@ -1,57 +1,43 @@
 "use client"
 
-import { motion, Variants } from "framer-motion" // Added Variants import
+import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
 
 export default function Preloader() {
-  // 1. Properly type the text/logo variants
-  const textVariants: Variants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } 
-    },
-    exit: { 
-      opacity: 0, 
-      y: -20, 
-      transition: { duration: 0.5, ease: [0.55, 0.06, 0.68, 0.19] } 
-    }
-  }
+  const [isLoading, setIsLoading] = useState(true)
 
-  // 2. Properly type the progress bar variants
-  const barVariants: Variants = {
-    hidden: { width: "0%" },
-    visible: { 
-      width: "100%", 
-      transition: { duration: 3, ease: [0.25, 0.46, 0.45, 0.94] } 
-    }
-  }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!isLoading) return null
 
   return (
-    <motion.div 
-      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-background"
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8, ease: "easeInOut" }}
+    <motion.div
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: 1.5 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background"
     >
-      {/* Example usage of variants */}
       <motion.div
-        variants={textVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        className="text-primary font-mono tracking-widest text-sm mb-4"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.6, 0.01, 0.05, 0.95] }}
+        className="text-center"
       >
-        INITIALIZING_SYSTEM_CORE...
-      </motion.div>
-      
-      <div className="w-48 h-[2px] bg-white/5 rounded-full overflow-hidden">
-        <motion.div 
-          variants={barVariants}
-          initial="hidden"
-          animate="visible"
-          className="h-full bg-primary shadow-[0_0_15px_rgba(var(--primary),0.5)]" 
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"
         />
-      </div>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">
+          Loading...
+        </h2>
+      </motion.div>
     </motion.div>
   )
 }
