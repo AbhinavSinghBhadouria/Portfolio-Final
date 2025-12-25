@@ -1,4 +1,4 @@
-[providers]
+[provider]
 node = "18"
 
 [phases.build]
