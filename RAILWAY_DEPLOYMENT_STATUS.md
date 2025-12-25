@@ -5,6 +5,12 @@
 - **GitHub**: ✅ All fixes pushed successfully  
 - **Railway URL**: https://portfolio-final-production-88b9.up.railway.app
 - **DNS Resolution**: ❌ Still resolving (normal for new deployments)
+- **Deployment**: 🚧 In Progress - Check Railway dashboard for status
+
+## Updated Timeline
+- **Started**: ~15 minutes ago
+- **DNS Propagation**: Can take 15-60 minutes for new Railway apps
+- **Expected**: Should resolve within next 30-45 minutes
 
 ## Next Steps
 
