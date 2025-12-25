@@ -1,0 +1,12 @@
+[providers]
+node = "18"
+
+[phases.build]
+dependsOn = ["install"]
+cmds = ["npm run build"]
+
+[phases.install]
+cmds = ["npm install"]
+
+[start]
+cmd = "npm run start"
